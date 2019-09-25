@@ -3,8 +3,8 @@ import java.lang.Math; // import Java Math library
 public class TTTGame{
     private Player[] players = new Player[2]; // create an array of Player object
     private IBoard gameBoard;
-    private int row = 3; //number of row of the board
-    private int col = 3; // number of column of the board
+    private int row = 3;
+    private int col = 3;
     private int scoreToWin = 3; //score required to win the game
     private String[] marks = {"X", "O"}; // unique mark for each player
     private String name = "TicTacToe"; // name of the game
@@ -12,22 +12,30 @@ public class TTTGame{
 
     // Game constructor
     public TTTGame(){
-        setPlayers(); // initialize each player in the game
         setBoard(); // create a Board object based on the rows and columns with the name "TTT Board"
+        setPlayers(); // initialize each player in the game
         start(); // start the game
     }
 
     // Game constructor
     public TTTGame(IBoard board){
-        setPlayers(); // initialize each player in the game
+        this.row = board.getRowSize();
+        this.col = board.getColSize();
+        scoreToWin = row;
         setBoard(board); // create a Board object based on the rows and columns with the name "TTT Board"
+        setPlayers(); // initialize each player in the game
         start(); // start the game
     }
 
+    public String getName(){
+        return this.name;
+    }
 
     private void start(){
         // Starting message
         System.out.println("Game started ... ");
+        // Print Board Info
+        System.out.println("Board: " + this.gameBoard.getName());
         //Print out starting player and his/her mark
         System.out.println("Starting Players: "+players[currentPlayerIndex].getName()+", Mark: "+players[currentPlayerIndex].getMark());
         boolean game_over = false;
@@ -57,22 +65,22 @@ public class TTTGame{
     private boolean isWinner(){
         // Check each row for winner and return true if there is one
         if(checkRow()){
-            System.out.println(players[currentPlayerIndex].getName()+" Win!!!");
+            System.out.println(players[currentPlayerIndex].getMark()+" Win!!!");
             return true;
         }
         // Check each column for winner and return true if there is one
         else if(checkCol()){
-            System.out.println(players[currentPlayerIndex].getName()+" Win!!!");
+            System.out.println(players[currentPlayerIndex].getMark()+" Win!!!");
             return true;
         }
         // Check the right to left diagonal for winner and return true if there is one
         else if(checkDiagRL()){
-            System.out.println(players[currentPlayerIndex].getName()+" Win!!!");
+            System.out.println(players[currentPlayerIndex].getMark()+" Win!!!");
             return true;
         }
         // Check the left to right diagonal for winner and return true if there is one
         else if(checkDiagLR()){
-            System.out.println(players[currentPlayerIndex].getName()+" Win!!!");
+            System.out.println(players[currentPlayerIndex].getMark()+" Win!!!");
             return true;
         }
         // If there is no winner return false
@@ -171,11 +179,8 @@ public class TTTGame{
             this.currentPlayerIndex = 1;
     }
 
-    //TODO: make a general type board
-
-
     public void setBoard(){
-        this.gameBoard = new Board(this.row,this.col,"TTT Board"); // creating new Board object and set it as the game board
+        this.gameBoard = new Board(this.row,this.col,"1D TicTacToe Board"); // creating new Board object and set it as the game board
     }
 
     public void setBoard(IBoard board){

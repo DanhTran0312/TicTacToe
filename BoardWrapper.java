@@ -1,8 +1,9 @@
 public class BoardWrapper implements IBoard{
 
-    Board board = new Board();
+    MyBoard board;
 
     public BoardWrapper(){
+        board = new MyBoard();
     }
 
     @Override
