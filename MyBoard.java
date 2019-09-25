@@ -1,4 +1,4 @@
-public class MyBoard implements IBoard{
+public class MyBoard{
     private Box boxes[][]; // boxes within the board
     private int col; // constant colunm number of the board
     private int  row; // constant row number of the board
@@ -17,29 +17,29 @@ public class MyBoard implements IBoard{
         initBoard(); // initialize boxes in the board
     }
 
-    @Override
+
     public int getColSize(){
         return this.col;
     }
 
-    @Override
+
     public int getRowSize(){
         return this.row;
     }
 
-    @Override
+
     public String getName(){
         return this.name;
     }
 
-    @Override
+
     public void setSize(int row, int col){
         this.row = row;
         this.col = col;
     }
 
     // Check if the board is full or not
-    @Override
+
     public boolean isFull(){
         for(int i = 0;i<boxes.length;i++){
             for(int j = 0;j<boxes[i].length;j++){
@@ -52,13 +52,13 @@ public class MyBoard implements IBoard{
     }
 
     // Make a move/Place a mark in a selected box
-    @Override
+
     public boolean makeMove(String player, int row, int col){
         return boxes[row][col].setValue(player);
     }
 
     // Get the value/placeholder of a selected box
-    @Override
+
     public String getMark(int row, int col){
         return boxes[row][col].getValue();
     }
@@ -73,7 +73,7 @@ public class MyBoard implements IBoard{
     }
 
     // print board layout
-    @Override
+
     public void print(){
         String output = ""; // storing the output
         for(int i = 0;i<boxes.length;i++){
@@ -86,16 +86,6 @@ public class MyBoard implements IBoard{
 
         }
         System.out.print(output);
-    }
-
-
-    // print out each box value for testing purposes
-    public void printTest(){
-        for(int i = 0;i<boxes.length;i++){
-            for(int j = 0;j<boxes[i].length;j++){
-                System.out.println("row:" + boxes[i][j].getRow() +" col:"+boxes[i][j].getCol()+ " placeholder:"+boxes[i][j].getValue());
-            }
-        }
     }
 
 }

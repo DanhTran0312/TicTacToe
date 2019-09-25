@@ -179,11 +179,11 @@ public class TTTGame{
             this.currentPlayerIndex = 1;
     }
 
-    public void setBoard(){
+    private void setBoard(){
         this.gameBoard = new Board(this.row,this.col,"1D TicTacToe Board"); // creating new Board object and set it as the game board
     }
 
-    public void setBoard(IBoard board){
+    private void setBoard(IBoard board){
         this.gameBoard = board; // setting the game board to the board of the customer
     }
 
