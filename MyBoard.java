@@ -38,6 +38,7 @@ public class MyBoard implements IBoard{
         this.col = col;
     }
 
+    // Check if the board is full or not
     @Override
     public boolean isFull(){
         for(int i = 0;i<boxes.length;i++){
@@ -50,17 +51,19 @@ public class MyBoard implements IBoard{
         return true;
     }
 
+    // Make a move/Place a mark in a selected box
     @Override
     public boolean makeMove(String player, int row, int col){
         return boxes[row][col].setValue(player);
     }
 
+    // Get the value/placeholder of a selected box
     @Override
     public String getMark(int row, int col){
         return boxes[row][col].getValue();
     }
 
-
+    // Initialize the 2d array of boxes
     private void initBoard(){
         for(int i = 0;i<boxes.length;i++){
             for(int j = 0;j<boxes[i].length;j++){

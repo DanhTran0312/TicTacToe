@@ -3,16 +3,16 @@ import java.lang.Math; // import Java Math library
 public class TTTGame{
     private Player[] players = new Player[2]; // create an array of Player object
     private IBoard gameBoard;
-    private int row = 3;
-    private int col = 3;
-    private int scoreToWin = 3; //score required to win the game
+    private int row = 3; // Default row size
+    private int col = 3; // Default column size
+    private int scoreToWin = 3; //score required to win the game {Default is 3}
     private String[] marks = {"X", "O"}; // unique mark for each player
     private String name = "TicTacToe"; // name of the game
     private int currentPlayerIndex = (int) (Math.random()*2); // randomly assign the index of the person who is going first
 
     // Game constructor
     public TTTGame(){
-        setBoard(); // create a Board object based on the rows and columns with the name "TTT Board"
+        setBoard(); // create a Board object based on the rows and columns with the name "1D TicTacToe Board"
         setPlayers(); // initialize each player in the game
         start(); // start the game
     }
@@ -184,7 +184,7 @@ public class TTTGame{
     }
 
     public void setBoard(IBoard board){
-        this.gameBoard = board; // creating new Board object and set it as the game board
+        this.gameBoard = board; // setting the game board to the board of the customer
     }
 
     // method that set the player name and unique mark
