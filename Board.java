@@ -1,92 +1,113 @@
 public class Board implements IBoard{
-    private Box boxes[]; // boxes within the board
+    private Box boxes[][]; // boxes within the board
     private int col; // constant colunm number of the board
     private int  row; // constant row number of the board
     private String name; // name of the board
+    private final static String DASH = "-";
+    private String boardMark = DASH;
+
+    public String getBoardMark(){
+        return boardMark;
+    }
+
+    private boolean isEmpty(){
+        return boardMark.equals(Board.DASH);
+    }
+
+    public boolean setBoardMark(String mark){
+        if(isEmpty()){
+            boardMark = mark;
+            return true;
+        }
+        else
+            return false;
+    }
 
     // default constructor
     Board(){
-        this(3,3,"Default 1D TicTacToe Board"); // Default Setting for Board
+        this(3,3,"2D TicTacToe Board"); // Default Setting for Board
     }
 
     // Constructor that takes 3 parameters
     Board(int rowNum,int colNum,String boardName){
         this.setSize(rowNum, colNum);
         name = boardName;
-        boxes = new Box[this.row*this.col];
+        boxes = new Box[this.row][this.col];
         initBoard(); // initialize boxes in the board
     }
 
-    @Override
+    public Box getBox(int row, int col){
+        return boxes[row][col];
+    }
+
     public int getColSize(){
         return this.col;
     }
 
-    @Override
+
     public int getRowSize(){
         return this.row;
     }
 
-    @Override
+
     public String getName(){
         return this.name;
     }
 
-    @Override
+
     public void setSize(int row, int col){
         this.row = row;
         this.col = col;
     }
 
     // Check if the board is full or not
-    @Override
+
     public boolean isFull(){
-        for(Box b: this.boxes){
-            if(b.isEmpty())
-                return false;
+        for(int i = 0;i<boxes.length;i++){
+            for(int j = 0;j<boxes[i].length;j++){
+                if(boxes[i][j].isEmpty())
+                    return false;
+            }
         }
         System.out.println("Tie Game");
         return true;
     }
 
     // Make a move/Place a mark in a selected box
-    @Override
+
     public boolean makeMove(String player, int row, int col){
-        return boxes[row*this.col+col].setValue(player);
+        return boxes[row][col].setValue(player);
     }
 
     // Get the value/placeholder of a selected box
-    @Override
+
     public String getMark(int row, int col){
-        return boxes[row*this.col+col].getValue();
+        return boxes[row][col].getValue();
     }
 
     // Initialize the 2d array of boxes
     private void initBoard(){
-        for(int i=0;i<boxes.length;i++){
-            boxes[i] = new Box(i/this.col, i%this.col); // create a new Box object for each box in the array.
+        for(int i = 0;i<boxes.length;i++){
+            for(int j = 0;j<boxes[i].length;j++){
+                boxes[i][j] = new Box(i, j); // create a new Box object for each box in the array.
+            }
         }
     }
 
     // print board layout
-    @Override
+
     public void print(){
         String output = ""; // storing the output
         for(int i = 0;i<boxes.length;i++){
-            if((i+1)%this.col == 0)
-                output += (boxes[i].getValue() + "\n"); // return when reach the end of the row
-            else
-                output += (boxes[i].getValue() + " "); // adding a space after a value
+            for(int j = 0;j<boxes[i].length;j++){
+                if(j+1 == this.col)
+                    output += (boxes[i][j].getValue() + "\n"); // return when reach the end of the row
+                else
+                    output += (boxes[i][j].getValue() + " "); // adding a space after a value
+            }
+
         }
         System.out.print(output);
-    }
-
-
-    // print out each box value for testing purposes
-    public void printTest(){
-        for(int i=0;i<boxes.length;i++){
-            System.out.println("row:" + boxes[i].getRow() +" col:"+boxes[i].getCol()+ " placeholder:"+boxes[i].getValue());
-        }
     }
 
 }
